@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: qr_code_generator
+  kafka:
+    bootstrap-servers: "kafka:9092"
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com:
+      locfox: debug
+    root: info
+  file:
+    name: qr_code_generator.log
+  logback:
+    rollingpolicy:
+      max-file-size: 5000000
+
+redis:
+  host: localhost
+  port: 6379
+
+qr_code:
+  host: 'http://localhost:8080/'
+
+kafka:
+  group_id: "qr-code-generator-service"
+  host: "kafka:9092"

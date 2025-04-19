@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: auth_service
+
+logging:
+  level:
+    com:
+      locfox: debug
+    root: info
+  file:
+    name: auth_service.log
+  logback:
+    rollingpolicy:
+      max-file-size: 5000000
+
+redis:
+  host: auth_redis
+  port: 6381
+
+grpc:
+  accounts_service:
+    host: account-service
+    port: 8090
+  server:
+    port: 8090
+jwt:
+  secret: 'aslkdf0f7slkdjfklsdjfoiyDASKMFdsof8sd7f8HSDOJFHlksdfy809ds780f'

@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: codes_handler
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://codes-handler-db:5432/codes
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+  kafka:
+    bootstrap-servers: "kafka:9092"
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.security.web.FilterChainProxy: TRACE
+    org.springframework.security.web.access.ExceptionTranslationFilter: DEBUG
+    org.springframework.security.access: TRACE
+    org.springframework.security.web.access: TRACE
+    com:
+      locfox: debug
+    root: info
+  file:
+    name: codes_handler.log
+  logback:
+    rollingpolicy:
+      max-file-size: 5000000
+
+redis:
+  host: codes-handler-redis
+  port: 6382
+  jwt_black_list:
+    # ttl in milliseconds
+    ttl: 3600000
+    host: auth-redis
+    port: 6379
+
+grpc:
+  account_service:
+    port: 8090
+    host: account-service
+  server:
+    port: 8090
+
+kafka:
+  group_id: "codes-handler"
+  host: "kafka:9092"
+
+jwt:
+  secret: 'aslkdf0f7slkdjfklsdjfoiyDASKMFdsof8sd7f8HSDOJFHlksdfy809ds780f'

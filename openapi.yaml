@@ -1,0 +1,329 @@
+openapi: 3.0.3
+info:
+  title: Qr Book
+  version: 1.0.0
+  description: ...
+  contact:
+    email: jandylokc@gmail.com
+    name: illia
+    url: https://gihtub.com/AndyLocks
+servers:
+  - url: http://localhost:8080
+    variables: {}
+    description: Local nginx server
+paths:
+  /account:
+    delete:
+      operationId: deleteAccount
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk'
+      responses:
+        '200':
+          description: ok
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccount'
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk'
+      responses:
+        '200':
+          description: ok
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: getAccount
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk'
+      responses:
+        '200':
+          description: ok
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{qr_code_uuid}/qr_code:
+    get:
+      operationId: getQrCode
+      responses:
+        '200':
+          description: ok
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{qr_code_uuid}:
+    delete:
+      operationId: deleteQrCode
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk'
+      responses:
+        '200':
+          description: ok
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateQrCode
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Url'
+      responses:
+        '200':
+          description: ok
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: redirect
+      responses:
+        '303':
+          description: ok
+        '204':
+          description: Url was not found
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /:
+    post:
+      operationId: newQrCodePost
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Url'
+      responses:
+        '200':
+          description: ok
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /login:
+    summary: Login with password and email and get jwt token
+    description: Login with password and email and get jwt token
+    post:
+      summary: Login with password and email and get jwt token
+      description: Login with password and email and get jwt token
+      operationId: loginPost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NicknameAndPassword'
+      responses:
+        '200':
+          description: ok
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '404':
+          description: user is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorWithDetails'
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /logout:
+    post:
+      operationId: logoutPost
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk'
+      responses:
+        '200':
+          description: ok
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Token'
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /register:
+    post:
+      operationId: registerPost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+      responses:
+        '200':
+          description: ok
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Token'
+        default:
+          description: 5xx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    UpdateAccount:
+      type: object
+      required:
+        - nickname
+        - password
+      properties:
+        nickname:
+          type: string
+          example: aboba
+        password:
+          type: string
+          example: aboba
+    Url:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          example: https://www.youtube.com/watch?v=XjxnqLDac7g
+    Register:
+      type: object
+      required:
+        - nickname
+        - password
+      properties:
+        password:
+          type: string
+          example: abobagleg
+        nickname:
+          type: string
+          example: ananas
+    NicknameAndPassword:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        password:
+          type: string
+          example: aboba
+        nickname:
+          type: string
+          example: aboba
+    Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: 2024-07-19T21:32:10.185+00:00
+        status:
+          type: integer
+        error:
+          type: string
+          example: error
+        path:
+          type: string
+          example: /login
+    ErrorWithDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          example: about:blank
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+          example: /login
+    Token:
+      type: string
+      description: jwt token
+      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYm9iYSJ9.IE6ahNvc4g-fuQb89GT5LKPTkiypciBiovH4KlrbYEk

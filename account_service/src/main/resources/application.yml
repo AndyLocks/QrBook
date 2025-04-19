@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: account_service
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://accounts-db:5432/accounts
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.security.web.FilterChainProxy: TRACE
+    org.springframework.security.web.access.ExceptionTranslationFilter: DEBUG
+    org.springframework.security.access: TRACE
+    org.springframework.security.web.access: TRACE
+    com:
+      locfox: debug
+    root: info
+  file:
+    name: accounts_service.log
+  logback:
+    rollingpolicy:
+      max-file-size: 5000000
+
+redis:
+  host: redis
+  port: 6379
+  jwt_black_list:
+    # ttl in milliseconds
+    ttl: 3600000
+    host: auth-redis
+    port: 6379
+
+grpc:
+  codes_handler:
+    host: codes-handler
+    port: 8090
+  auth_service:
+    port: 8090
+    host: auth-service
+  server:
+    port: 8090
+
+kafka:
+  host: "kafka:9092"
+
+jwt:
+  secret: 'aslkdf0f7slkdjfklsdjfoiyDASKMFdsof8sd7f8HSDOJFHlksdfy809ds780f'

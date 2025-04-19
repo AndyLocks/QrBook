@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: redirect_service
+  kafka:
+    bootstrap-servers: "kafka:9092"
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com:
+      locfox: debug
+    root: info
+  file:
+    name: redirect_service.log
+  logback:
+    rollingpolicy:
+      max-file-size: 5000000
+
+redis:
+  host: redirect-service-redis
+  port: 6382
+
+grpc:
+  codes_handler:
+    host: codes-handler
+    port: 8090
+
+kafka:
+  group_id: "redirect-service"
+  host: "kafka:9092"
