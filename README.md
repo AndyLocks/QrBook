@@ -1,4 +1,4 @@
-[**Документация также доступна на русском языке!!!**](../README_ru.md)
+[**Документация также доступна на русском языке!!!**](./ru_doc/README.md)
 
 This is a SaaS application that allows you to share a public link and get a QR code that can be printed without worrying about it becoming outdated — because you can change the destination at any time!
 
