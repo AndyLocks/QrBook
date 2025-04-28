@@ -3,6 +3,7 @@ package com.locfox.qr_book.account_service.config.security.filter;
 import com.locfox.qr_book.account_service.config.security.UserDetailsServiceImpl;
 import com.locfox.qr_book.account_service.service.JwtUtils;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -51,7 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String subject = null;
         try {
             subject = jwtUtils.getSubject(token);
-        } catch (ExpiredJwtException | SignatureException e) {
+        } catch (JwtException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
