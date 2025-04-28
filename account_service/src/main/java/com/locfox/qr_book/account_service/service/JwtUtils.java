@@ -19,7 +19,7 @@ import java.security.Key;
 @Service
 public class JwtUtils {
 
-    @Value("${jwt.secret}")
+    @Value("${JWT_SECRET}")
     private String jwtSecret;
     private StringRedisTemplate stringRedisTemplate;
 

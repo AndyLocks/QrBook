@@ -19,7 +19,7 @@ import java.util.Date;
 @Service
 public class JwtUtils {
 
-    @Value("${jwt.secret}")
+    @Value("${JWT_SECRET}")
     private String jwtSecret;
     private RedisTemplate<String, String> tokenTemplate;
 

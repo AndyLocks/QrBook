@@ -23,5 +23,3 @@ grpc:
     port: 8090
   server:
     port: 8090
-jwt:
-  secret: 'aslkdf0f7slkdjfklsdjfoiyDASKMFdsof8sd7f8HSDOJFHlksdfy809ds780f'

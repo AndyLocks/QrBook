@@ -54,6 +54,3 @@ grpc:
 
 kafka:
   host: "kafka:9092"
-
-jwt:
-  secret: 'aslkdf0f7slkdjfklsdjfoiyDASKMFdsof8sd7f8HSDOJFHlksdfy809ds780f'
